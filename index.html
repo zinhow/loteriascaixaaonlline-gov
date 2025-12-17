@@ -27,6 +27,46 @@ src="https://www.facebook.com/tr?id=1976698369759140&ev=PageView&noscript=1"
     <link href="./index_files/css2-2" rel="stylesheet">
     <link rel="stylesheet" href="./index_files/bootstrap-icons.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+<script>
+  (function () {
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const keys = [
+      'utm_source',
+      'utm_medium',
+      'utm_campaign',
+      'utm_content',
+      'utm_term',
+      'src',
+      'sck',
+      'valor'
+    ];
+
+    keys.forEach(key => {
+      const value = urlParams.get(key);
+      if (value) {
+        localStorage.setItem(key, value);
+      }
+    });
+
+    function getParam(name) {
+      return urlParams.get(name) || localStorage.getItem(name);
+    }
+
+    const dados = {
+      valor: getParam('valor'),
+      utm_source: getParam('utm_source'),
+      utm_medium: getParam('utm_medium'),
+      utm_campaign: getParam('utm_campaign'),
+      utm_content: getParam('utm_content'),
+      utm_term: getParam('utm_term'),
+      src: getParam('src'),
+      sck: getParam('sck')
+    };
+
+    console.log('Dados finais:', dados);
+  })();
+</script>
 
 <script>
   window.pixelId = "6760fb4642265904392e3638";

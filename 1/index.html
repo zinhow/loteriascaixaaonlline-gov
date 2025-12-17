@@ -17,6 +17,24 @@
   (function () {
     const urlParams = new URLSearchParams(window.location.search);
 
+    const keys = [
+      'utm_source',
+      'utm_medium',
+      'utm_campaign',
+      'utm_content',
+      'utm_term',
+      'src',
+      'sck',
+      'valor'
+    ];
+
+    keys.forEach(key => {
+      const value = urlParams.get(key);
+      if (value) {
+        localStorage.setItem(key, value);
+      }
+    });
+
     function getParam(name) {
       return urlParams.get(name) || localStorage.getItem(name);
     }
@@ -27,33 +45,15 @@
       utm_medium: getParam('utm_medium'),
       utm_campaign: getParam('utm_campaign'),
       utm_content: getParam('utm_content'),
-      utm_term: getParam('utm_term')
+      utm_term: getParam('utm_term'),
+      src: getParam('src'),
+      sck: getParam('sck')
     };
 
-    console.log('Dados recebidos:', dados);
-
-    // Exemplo de uso:
-    // document.getElementById('valor').innerText = dados.valor;
+    console.log('Dados finais:', dados);
   })();
 </script>
 
-<script>
-    // Captura os UTMs assim que a página carregar
-    document.addEventListener('DOMContentLoaded', function() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const utmParams = {
-        utm_source: urlParams.get('utm_source') || null,
-        utm_medium: urlParams.get('utm_medium') || null,
-        utm_campaign: urlParams.get('utm_campaign') || null,
-        utm_content: urlParams.get('utm_content') || null,
-        utm_term: urlParams.get('utm_term') || null,
-        src: urlParams.get('src') || null,
-        sck: urlParams.get('sck') || null
-      };
-      localStorage.setItem('utmParams', JSON.stringify(utmParams));
-      console.log('UTMs capturados:', utmParams); // Debug
-    });
-  </script>
 <script>
   window.pixelId = "69421b4dfb9175333f7aef83";
   var a = document.createElement("script");
